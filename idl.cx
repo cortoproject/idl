@@ -1,0 +1,55 @@
+#package corto/ext/idl
+
+// Stub Typedefs
+class Typedef::
+  type: object
+  lang/type actualType()
+
+// Member class with extra information about actual type
+class Member: lang/member, options={parentState=DECLARED}::
+  actualType: object
+
+// Get actual type (if object is typedef, unwind)
+lang/type actualType(object type)
+
+// Add actualType annotation (for mapping types not natively supported by corto)
+void annotateActualType(object o, object t)
+object annotateGetActualType(object o)
+
+// Add optional annotation
+void annotateOptional(object o, bool optional)
+bool annotateGetOptional(object o)
+
+class Declarator::
+    identifier: string
+    arraySizes: list{uint32}
+    lang::type getType(lang::type t)
+
+struct InheritanceSpec::
+    base: lang::interface
+    supports: list{lang::type}
+
+class Parser::
+    filename: string
+    source: string
+    line: int32, local|readonly
+    column: int32, local|readonly
+    errors: int32, readonly
+    scope: object, readonly
+
+    int16 construct()
+    int16 parse()
+    package pushModule(string name)
+    void popModule()
+    struct declareStruct(string name)
+    int16 defineStruct(struct s)
+    union declareUnion(string name, lang::type discriminator)
+    int16 defineUnion(union u)
+    class declareValueType(string name, InheritanceSpec inherits)
+    int16 defineValueType(class v)
+    int16 parseMember(lang::type type, list{Declarator} name, bool readonly)
+    int16 parseCase(lang::type type, list{Declarator} name, list{int32} discriminator)
+    int16 parseMethod(lang::type returnType, string name, list{lang::parameter} parameters)
+    enum parseEnum(string name, list{string} enumerators)
+    object parseTypedef(type t, list{Declarator} declarators)
+    int16 parsePragma(string args)

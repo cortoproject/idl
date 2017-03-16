@@ -1,0 +1,2 @@
+/corto/ext/idl
+/corto/test

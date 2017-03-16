@@ -1,0 +1,20 @@
+
+typedef long i32;
+typedef float f32, real;
+typedef sequence<real, 3> realSeq;
+typedef sequence<sequence<real, 4>, 5> realSeqSeq;
+typedef string stringArray[6];
+struct Point {
+	long x, y;
+};
+typedef Point pointArray[7];
+
+struct Typedefs {
+	i32 m_1;
+	f32 m_2;
+	real m_3;
+	realSeq m_4;
+	realSeqSeq m_5;
+	stringArray m_6;
+	pointArray m_7;
+};

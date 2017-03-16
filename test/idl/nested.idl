@@ -1,0 +1,8 @@
+
+struct Parent {
+	string m_1;
+
+	struct NestedStruct {
+		string m;
+	} m_2;
+};

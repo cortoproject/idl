@@ -1,0 +1,16 @@
+
+struct Point {
+	long x, y;
+};
+
+struct Primitives {
+	short m_short;
+	long m_long;
+	long long m_longlong;
+	unsigned short m_ushort;
+	unsigned long m_ulong;
+	unsigned long long m_ulonglong;
+	float m_float;
+	double m_double;
+	string m_string;
+};

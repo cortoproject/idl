@@ -1,0 +1,103 @@
+#package ::test
+
+// Test an empty IDL file
+test::Suite Empty ::
+    void tc_empty()
+    
+    p: ext::idl::Parser
+
+// Test comments
+test::Suite Comments ::
+    void tc_comments() 
+    
+    p: ext::idl::Parser
+
+// Test a struct with primitive types
+test::Suite Simple ::
+    void setup() method
+
+    void tc_point() 
+    void tc_primitives() 
+
+    p: ext::idl::Parser
+
+// Test a nested struct
+test::Suite Nested ::
+    void setup() method
+
+    void tc_nestedStruct() 
+
+    p: ext::idl::Parser
+
+// Test usage of modules
+test::Suite Module ::
+    void setup() method
+
+    void tc_module() 
+    void tc_nestedModule() 
+
+    p: ext::idl::Parser
+
+// Test arrays
+test::Suite Array ::
+    void setup() method
+
+    void tc_array() 
+    void tc_arrayDouble() 
+    void tc_arrayMultiple() 
+    void tc_arrayMultipleDouble() 
+    void tc_arrayTriple() 
+    void tc_arrayMultipleTriple() 
+    void tc_arrayMultipleNestedTriple() 
+
+    p: ext::idl::Parser
+
+// Test enums
+test::Suite Enum ::
+    void setup() method
+
+    void tc_enum() 
+
+    p: ext::idl::Parser
+
+// Test sequences
+test::Suite Sequence ::
+    void setup() method
+
+    void tc_sequence() 
+    void tc_sequenceMax() 
+    void tc_sequenceStruct() 
+    void tc_sequenceStructNested() 
+    void tc_sequenceNested() 
+
+    p: ext::idl::Parser
+
+// Test typedefs
+test::Suite Typedef ::
+    void setup() method
+
+    void tc_simple() 
+    void tc_multiDeclarator() 
+    void tc_sequence() 
+    void tc_sequenceNested() 
+    void tc_array() 
+    void tc_arrayOfStruct() 
+
+    p: ext::idl::Parser
+
+// Test valuetypes
+test::Suite ValueType::
+    void setup() method
+
+    void tc_attribute() 
+    void tc_attributeMulti() 
+    void tc_attributeReadonly() 
+    void tc_attributeStruct() 
+    void tc_attributeEnum() 
+    void tc_methodReturn() 
+    void tc_methodInParam() 
+    void tc_methodOutParam() 
+    void tc_methodOutParamNonRef() 
+    void tc_methodTwoParams() 
+
+    p: ext::idl::Parser

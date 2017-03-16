@@ -1,0 +1,35 @@
+
+valuetype Foo {
+    attribute long m_1;
+    attribute long m_2, m_3;
+    readonly attribute string m_readonly;
+
+    enum Color {
+        RED, GREEN, BLUE
+    };
+
+    attribute Color m_enum;
+
+    struct Nested {
+        long m_1;
+    };
+
+    attribute Nested m_struct;
+
+    void inparam(in Foo p);
+    void outparam(out Foo p);
+    // void outparamNonRef(out long i);
+
+    Foo returnval();
+
+    void twoparams(in Foo p, out long status);
+};
+
+valuetype Bar : Foo {
+    attribute long m_bar;
+};
+
+valuetype Empty {
+
+};
+

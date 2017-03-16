@@ -1,0 +1,12 @@
+
+module MyModule {
+	struct Foo {
+		long m;
+	};
+
+	module Nested {
+		struct Bar {
+			string m;
+		};
+	};
+};

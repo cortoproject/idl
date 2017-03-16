@@ -1,0 +1,13 @@
+
+struct Arrays {
+	long m_1[3];
+	long m_2[4][5];
+	long m_3, m_4[6];
+	long m_5, m_6[7][8];
+	long m_7[9][10][11];
+	long m_8[12], m_9[13], m_10[14][15][16];
+
+	struct Point {
+		long x, y;
+	} m_11, m_12, m_13[15][16][17];
+};
