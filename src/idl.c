@@ -72,7 +72,7 @@ corto_type _idl_actualType(
 /* $end */
 }
 
-corto_void _idl_annotateActualType(
+void _idl_annotateActualType(
     corto_object o,
     corto_object t)
 {
@@ -94,7 +94,7 @@ corto_object _idl_annotateGetActualType(
 /* $end */
 }
 
-corto_bool _idl_annotateGetOptional(
+bool _idl_annotateGetOptional(
     corto_object o)
 {
 /* $begin(corto/ext/idl/annotateGetOptional) */
@@ -106,9 +106,9 @@ corto_bool _idl_annotateGetOptional(
 /* $end */
 }
 
-corto_void _idl_annotateOptional(
+void _idl_annotateOptional(
     corto_object o,
-    corto_bool optional)
+    bool optional)
 {
 /* $begin(corto/ext/idl/annotateOptional) */
     idl_annotation  *a = idl_annotationGet(o, TRUE);

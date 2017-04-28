@@ -479,49 +479,49 @@ const_exp
 /*30*/
 or_expr
     : xor_expr
-    | or_expr T_VERTICAL_LINE xor_expr { corto_value_binaryOperator(CORTO_OR, &$1, &$3, &$$); }
+    | or_expr T_VERTICAL_LINE xor_expr { corto_value_binary(CORTO_OR, &$1, &$3, &$$); }
     ;
 
 /*31*/
 xor_expr
     : and_expr
-    | xor_expr T_CIRCUMFLEX and_expr { corto_value_binaryOperator(CORTO_XOR, &$1, &$3, &$$); }
+    | xor_expr T_CIRCUMFLEX and_expr { corto_value_binary(CORTO_XOR, &$1, &$3, &$$); }
     ;
 
 /*32*/
 and_expr
     : shift_expr
-    | and_expr T_AMPERSAND shift_expr { corto_value_binaryOperator(CORTO_AND, &$1, &$3, &$$); }
+    | and_expr T_AMPERSAND shift_expr { corto_value_binary(CORTO_AND, &$1, &$3, &$$); }
     ;
 
 /*33*/
 shift_expr
     : add_expr
-    | shift_expr T_SHIFTRIGHT add_expr { corto_value_binaryOperator(CORTO_SHIFT_RIGHT, &$1, &$3, &$$); }
-    | shift_expr T_SHIFTLEFT add_expr { corto_value_binaryOperator(CORTO_SHIFT_LEFT, &$1, &$3, &$$); }
+    | shift_expr T_SHIFTRIGHT add_expr { corto_value_binary(CORTO_SHIFT_RIGHT, &$1, &$3, &$$); }
+    | shift_expr T_SHIFTLEFT add_expr { corto_value_binary(CORTO_SHIFT_LEFT, &$1, &$3, &$$); }
     ;
 
 /*34*/
 add_expr
     : mult_expr
-    | add_expr T_PLUS_SIGN mult_expr { corto_value_binaryOperator(CORTO_ADD, &$1, &$3, &$$); }
-    | add_expr T_MINUS_SIGN mult_expr { corto_value_binaryOperator(CORTO_SUB, &$1, &$3, &$$); }
+    | add_expr T_PLUS_SIGN mult_expr { corto_value_binary(CORTO_ADD, &$1, &$3, &$$); }
+    | add_expr T_MINUS_SIGN mult_expr { corto_value_binary(CORTO_SUB, &$1, &$3, &$$); }
     ;
 
 /*35*/
 mult_expr
     : unary_expr
-    | mult_expr T_ASTERISK unary_expr { corto_value_binaryOperator(CORTO_MUL, &$1, &$3, &$$); }
-    | mult_expr T_SOLIDUS unary_expr { corto_value_binaryOperator(CORTO_DIV, &$1, &$3, &$$); }
-    | mult_expr T_PERCENT_SIGN unary_expr { corto_value_binaryOperator(CORTO_MOD, &$1, &$3, &$$); }
+    | mult_expr T_ASTERISK unary_expr { corto_value_binary(CORTO_MUL, &$1, &$3, &$$); }
+    | mult_expr T_SOLIDUS unary_expr { corto_value_binary(CORTO_DIV, &$1, &$3, &$$); }
+    | mult_expr T_PERCENT_SIGN unary_expr { corto_value_binary(CORTO_MOD, &$1, &$3, &$$); }
     ;
 
 /*36*/
 /*37*/
 unary_expr
-    : T_MINUS_SIGN primary_expr { corto_value_unaryOperator(CORTO_SUB, &$2, &$$); }
+    : T_MINUS_SIGN primary_expr { corto_value_unary(CORTO_SUB, &$2, &$$); }
     | T_PLUS_SIGN primary_expr { $$ = $2; }
-    | T_TILDE primary_expr { corto_value_unaryOperator(CORTO_NOT, &$2, &$$); }
+    | T_TILDE primary_expr { corto_value_unary(CORTO_NOT, &$2, &$$); }
     | primary_expr
     ;
 
@@ -535,13 +535,13 @@ primary_expr
 /*39*/
 /*40*/
 literal
-    : T_INTEGER_LITERAL {$$ = corto_value_literalInteger($1); }
-    | T_string_literal {$$ = corto_value_literalString($1); }
-    | T_CHARACTER_LITERAL {$$ = corto_value_literalCharacter($1); }
-    | T_FIXED_PT_LITERAL {$$ = corto_value_literalFloatingPoint($1); }
-    | T_FLOATING_PT_LITERAL {$$ = corto_value_literalFloatingPoint($1); }
-    | T_TRUE  {$$ = corto_value_literalBoolean(TRUE); }
-    | T_FALSE {$$ = corto_value_literalBoolean(FALSE); }
+    : T_INTEGER_LITERAL {$$ = corto_value_int($1); }
+    | T_string_literal {$$ = corto_value_string($1); }
+    | T_CHARACTER_LITERAL {$$ = corto_value_char($1); }
+    | T_FIXED_PT_LITERAL {$$ = corto_value_float($1); }
+    | T_FLOATING_PT_LITERAL {$$ = corto_value_float($1); }
+    | T_TRUE  {$$ = corto_value_bool(TRUE); }
+    | T_FALSE {$$ = corto_value_bool(FALSE); }
     ;
 
 /*41*/
@@ -809,7 +809,7 @@ enumerator
 /*80*/
 sequence_type
     : T_SEQUENCE T_LESS_THAN_SIGN simple_type_spec T_COMMA positive_int_const T_GREATER_THAN_SIGN {
-        $$ = corto_type(corto_sequenceCreate($3, *(corto_int32*)corto_value_getPtr(&$5)));
+        $$ = corto_type(corto_sequenceCreate($3, *(corto_int32*)corto_value_ptrof(&$5)));
     }
     | T_SEQUENCE T_LESS_THAN_SIGN simple_type_spec T_GREATER_THAN_SIGN { $$ = corto_type(corto_sequenceCreate($3, 0)); }
     ;
@@ -841,7 +841,7 @@ fixed_array_sizes
 /*84*/
 fixed_array_size
     : T_LEFT_SQUARE_BRACKET positive_int_const T_RIGHT_SQUARE_BRACKET {
-        $$ = *(corto_int32*)corto_value_getPtr(&$2);
+        $$ = *(corto_int32*)corto_value_ptrof(&$2);
     }
     ;
 

@@ -16,7 +16,9 @@ corto_type _idl_Declarator_getType(
     corto_type result = t;
 
     if (this->arraySizes && corto_llSize(this->arraySizes)) {
-        corto_uint32ListForeach(this->arraySizes, s) {
+        corto_iter it = corto_llIter(this->arraySizes);
+        while (corto_iterHasNext(&it)) {
+            corto_uint32 s = (corto_word)corto_iterNext(&it);
             result = corto_type(corto_arrayCreate(result, s));
             if (!result) {
             	goto error;
