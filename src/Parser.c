@@ -73,8 +73,8 @@ corto_class _idl_Parser_declareValueType(
         seq.buffer = corto_alloc(sizeof(corto_interface) * seq.length);
 
         corto_iter it = corto_llIter(inherits->supports);
-        while (corto_iterHasNext(&it)) {
-            corto_type interface = corto_iterNext(&it);
+        while (corto_iter_hasNext(&it)) {
+            corto_type interface = corto_iter_next(&it);
             corto_setref(&seq.buffer[i++], interface);
         }
     }
@@ -166,8 +166,8 @@ int16_t _idl_Parser_parseCase(
 /* $begin(corto/ext/idl/Parser/parseCase) */
 
     corto_iter it = corto_llIter(name);
-    while (corto_iterHasNext(&it)) {
-        idl_Declarator d = corto_iterNext(&it);
+    while (corto_iter_hasNext(&it)) {
+        idl_Declarator d = corto_iter_next(&it);
 
         corto_type t = idl_Declarator_getType(d, type);
         corto_case m = corto_caseDeclareChild(this->scope, d->identifier);
@@ -177,8 +177,8 @@ int16_t _idl_Parser_parseCase(
         corto_member(m)->weak = FALSE;
 
         corto_iter dIt = corto_llIter(discriminator);
-        while (corto_iterHasNext(&dIt)) {
-            corto_int32 label = (corto_word)corto_iterNext(&it);
+        while (corto_iter_hasNext(&dIt)) {
+            corto_int32 label = (corto_word)corto_iter_next(&it);
             corto_int32seqAppend(&m->discriminator, label);
         }
 
@@ -205,8 +205,8 @@ corto_enum _idl_Parser_parseEnum(
     corto_enum result = corto_enumDeclareChild(this->scope, name);
 
     corto_iter it = corto_llIter(enumerators);
-    while (corto_iterHasNext(&it)) {
-        corto_string e = corto_iterNext(&it);
+    while (corto_iter_hasNext(&it)) {
+        corto_string e = corto_iter_next(&it);
 
         corto_constant *c = corto_constantDeclareChild(result, e);
         if (corto_define(c)) {
@@ -240,8 +240,8 @@ int16_t _idl_Parser_parseMember(
      }
 
     corto_iter it = corto_llIter(name);
-    while (corto_iterHasNext(&it)) {
-        idl_Declarator d = corto_iterNext(&it);
+    while (corto_iter_hasNext(&it)) {
+        idl_Declarator d = corto_iter_next(&it);
 
         corto_type t = idl_Declarator_getType(d, type);
         idl_Member m = idl_MemberDeclareChild(this->scope, d->identifier);
@@ -298,8 +298,8 @@ int16_t _idl_Parser_parseMethod(
 
     if (parameters && corto_llSize(parameters)) {
         corto_iter it = corto_llIter(parameters);
-        while (corto_iterHasNext(&it)) {
-            corto_parameter *p = corto_iterNext(&it);
+        while (corto_iter_hasNext(&it)) {
+            corto_parameter *p = corto_iter_next(&it);
 
             if (i) {
                 strcat(sig, ",");
@@ -441,8 +441,8 @@ corto_object _idl_Parser_parseTypedef(
 
     /* Only allow typedefs to primitives or non-scoped types */
     corto_iter it = corto_llIter(declarators);
-    while (corto_iterHasNext(&it)) {
-        idl_Declarator d = corto_iterNext(&it);
+    while (corto_iter_hasNext(&it)) {
+        idl_Declarator d = corto_iter_next(&it);
 
         corto_type declaratorType = idl_Declarator_getType(d, t);
         if (!declaratorType) {
