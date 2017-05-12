@@ -15,8 +15,8 @@ corto_type _idl_Declarator_getType(
 /* $begin(corto/ext/idl/Declarator/getType) */
     corto_type result = t;
 
-    if (this->arraySizes && corto_llSize(this->arraySizes)) {
-        corto_iter it = corto_llIter(this->arraySizes);
+    if (this->arraySizes && corto_ll_size(this->arraySizes)) {
+        corto_iter it = corto_ll_iter(this->arraySizes);
         while (corto_iter_hasNext(&it)) {
             corto_uint32 s = (corto_word)corto_iter_next(&it);
             result = corto_type(corto_arrayCreate(result, s));

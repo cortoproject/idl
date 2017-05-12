@@ -286,7 +286,7 @@ interface_names
     ;
 
 scoped_names
-    : scoped_name { $$ = corto_llNew(); corto_typeListInsert($$, $1); }
+    : scoped_name { $$ = corto_ll_new(); corto_typeListInsert($$, $1); }
     | scoped_name T_COMMA scoped_names { $$ = $3; corto_typeListInsert($$, $1); }
     ;
 
@@ -603,8 +603,8 @@ constr_type_spec
 
 /*49*/
 declarators
-    : declarator { $$ = corto_llNew(); corto_llInsert($$, $1); }
-    | declarator T_COMMA declarators {$$ = $3; corto_llInsert($$, $1); }
+    : declarator { $$ = corto_ll_new(); corto_ll_insert($$, $1); }
+    | declarator T_COMMA declarators {$$ = $3; corto_ll_insert($$, $1); }
     ;
 
 /*50*/
@@ -615,7 +615,7 @@ declarator
 
 /*51*/
 simple_declarator
-    : T_IDENTIFIER { $$ = idl_DeclaratorCreate($1, corto_llNew()); }
+    : T_IDENTIFIER { $$ = idl_DeclaratorCreate($1, corto_ll_new()); }
     ;
 
 /*52*/
@@ -797,8 +797,8 @@ enum_type
     ;
 
 enumerators
-    : enumerator { $$ = corto_llNew(); corto_llInsert($$, $1); }
-    | enumerator T_COMMA enumerators { $$ = $3; corto_llInsert($$, $1); }
+    : enumerator { $$ = corto_ll_new(); corto_ll_insert($$, $1); }
+    | enumerator T_COMMA enumerators { $$ = $3; corto_ll_insert($$, $1); }
     ;
 
 /*79*/
@@ -834,7 +834,7 @@ array_declarator
     ;
 
 fixed_array_sizes
-    : fixed_array_size {$$ = corto_llNew(); corto_uint32ListInsert($$, $1); }
+    : fixed_array_size {$$ = corto_ll_new(); corto_uint32ListInsert($$, $1); }
     | fixed_array_size fixed_array_sizes { $$ = $2; corto_uint32ListInsert($$, $1); }
     ;
 
@@ -862,7 +862,7 @@ attr_dcl
     ;
 
 simple_declarators
-    : simple_declarator { $$ = corto_llNew(); idl_DeclaratorListInsert($$, $1); }
+    : simple_declarator { $$ = corto_ll_new(); idl_DeclaratorListInsert($$, $1); }
     | simple_declarator T_COMMA simple_declarators { $$ = $3; idl_DeclaratorListInsert($$, $1); }
     ;
 
@@ -907,7 +907,7 @@ parameter_dcls
     ;
 
 param_dcls
-    : param_dcl { $$ = corto_llNew(); corto_parameterListInsert($$, &$1);}
+    : param_dcl { $$ = corto_ll_new(); corto_parameterListInsert($$, &$1);}
     | param_dcl T_COMMA param_dcls { $$ = $3; corto_parameterListInsert($$, &$1); }
     ;
 
