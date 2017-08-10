@@ -1,18 +1,11 @@
-/* $CORTO_GENERATED
- *
- * Declarator.c
- *
- * Only code written between the begin and end tags will be preserved
- * when the file is regenerated.
- */
+/* This is a managed file. Do not delete this comment. */
 
 #include <corto/ext/idl/idl.h>
 
-corto_type _idl_Declarator_getType(
+corto_type idl_Declarator_getType(
     idl_Declarator this,
     corto_type t)
 {
-/* $begin(corto/ext/idl/Declarator/getType) */
     corto_type result = t;
 
     if (this->arraySizes && corto_ll_size(this->arraySizes)) {
@@ -31,5 +24,5 @@ corto_type _idl_Declarator_getType(
     return result;
 error:
 	return NULL;
-/* $end */
 }
+

@@ -354,13 +354,13 @@ value_body
 /*17*/
 value_dcl
     : value_header T_LEFT_CURLY_BRACKET value_elements T_RIGHT_CURLY_BRACKET {
-        if (idl_Parser_defineValueType(idl_yparser(), $1)) {
+        if (Parser_defineValueType(idl_yparser(), $1)) {
             if (!corto_lasterr()) corto_seterr("unknown error at %s:%d", __FILE__, __LINE__);
             YYERROR;
         }
     }
     | value_header T_LEFT_CURLY_BRACKET T_RIGHT_CURLY_BRACKET {
-        if (idl_Parser_defineValueType(idl_yparser(), $1)) {
+        if (Parser_defineValueType(idl_yparser(), $1)) {
             if (!corto_lasterr()) corto_seterr("unknown error at %s:%d", __FILE__, __LINE__);
             YYERROR;
         }
@@ -375,7 +375,7 @@ value_elements
 /*18*/
 value_header
     : T_VALUETYPE T_IDENTIFIER value_inheritance_spec {
-        $$ = corto_type(idl_Parser_declareValueType(idl_yparser(), $2, &$3));
+        $$ = corto_type(Parser_declareValueType(idl_yparser(), $2, &$3));
         if (!$$) {
             if (!corto_lasterr()) corto_seterr("unknown error at %s:%d", __FILE__, __LINE__);
             YYERROR;
@@ -384,7 +384,7 @@ value_header
     | T_CUSTOM T_VALUETYPE T_IDENTIFIER value_inheritance_spec { $$ = NULL; corto_seterr("custom not supported"); YYERROR; }
     | T_VALUETYPE T_IDENTIFIER {
         idl_InheritanceSpec spec = {NULL, NULL};
-        $$ = corto_type(idl_Parser_declareValueType(idl_yparser(), $2, &spec));
+        $$ = corto_type(Parser_declareValueType(idl_yparser(), $2, &spec));
         if (!$$) {
             if (!corto_lasterr()) corto_seterr("unknown error at %s:%d", __FILE__, __LINE__);
             YYERROR;
@@ -552,7 +552,7 @@ positive_int_const
 /*42*/
 /*43*/
 type_dcl
-    : T_TYPEDEF type_spec declarators {idl_Parser_parseTypedef(idl_yparser(), $2, $3);}
+    : T_TYPEDEF type_spec declarators {Parser_parseTypedef(idl_yparser(), $2, $3);}
     | struct_type
     | union_type
     | enum_type
@@ -713,10 +713,10 @@ object_type
 /*69*/
 struct_type
     : T_STRUCT T_IDENTIFIER {
-        $<Type>$ = corto_type(idl_Parser_declareStruct(idl_yparser(), $2));
+        $<Type>$ = corto_type(Parser_declareStruct(idl_yparser(), $2));
     }
     T_LEFT_CURLY_BRACKET member_list T_RIGHT_CURLY_BRACKET {
-        if (idl_Parser_defineStruct(idl_yparser(), $<Type>3)) {
+        if (Parser_defineStruct(idl_yparser(), $<Type>3)) {
             if (!corto_lasterr()) corto_seterr("unknown error at %s:%d", __FILE__, __LINE__);
             YYERROR;
         }
@@ -733,7 +733,7 @@ member_list
 /*71*/
 member
     : type_spec declarators T_SEMICOLON {
-        if (idl_Parser_parseMember(idl_yparser(), $1, $2, FALSE)) {
+        if (Parser_parseMember(idl_yparser(), $1, $2, FALSE)) {
             if (!corto_lasterr()) corto_seterr("unknown error at %s:%d", __FILE__, __LINE__);
             YYERROR;
         }
@@ -744,14 +744,14 @@ member
 union_type
     : T_UNION T_IDENTIFIER T_SWITCH T_LEFT_PARANTHESIS switch_type_spec T_RIGHT_PARANTHESIS
     {
-        $<Type>$ = corto_type(idl_Parser_declareUnion(idl_yparser(), $2, $5));
+        $<Type>$ = corto_type(Parser_declareUnion(idl_yparser(), $2, $5));
         if (!$<Type>$) {
             YYERROR;
         }
     }
     T_LEFT_CURLY_BRACKET switch_body T_RIGHT_CURLY_BRACKET
     {
-        if (idl_Parser_defineUnion(idl_yparser(), $<Type>7)) {
+        if (Parser_defineUnion(idl_yparser(), $<Type>7)) {
             YYERROR;
         }
     }
@@ -792,7 +792,7 @@ element_spec
 /*78*/
 enum_type
     : T_ENUM T_IDENTIFIER T_LEFT_CURLY_BRACKET enumerators T_RIGHT_CURLY_BRACKET {
-        $$ = corto_type(idl_Parser_parseEnum(idl_yparser(), $2, $4));
+        $$ = corto_type(Parser_parseEnum(idl_yparser(), $2, $4));
     }
     ;
 
@@ -848,13 +848,13 @@ fixed_array_size
 /*85*/
 attr_dcl
     : T_ATTRIBUTE param_type_spec simple_declarators {
-        if (idl_Parser_parseMember(idl_yparser(), $2, $3, FALSE)) {
+        if (Parser_parseMember(idl_yparser(), $2, $3, FALSE)) {
             if (!corto_lasterr()) corto_seterr("unknown error at %s:%d", __FILE__, __LINE__);
             YYERROR;
         }
     }
     | T_READONLY T_ATTRIBUTE param_type_spec simple_declarators {
-        if (idl_Parser_parseMember(idl_yparser(), $3, $4, TRUE)) {
+        if (Parser_parseMember(idl_yparser(), $3, $4, TRUE)) {
             if (!corto_lasterr()) corto_seterr("unknown error at %s:%d", __FILE__, __LINE__);
             YYERROR;
         }
@@ -881,7 +881,7 @@ members
 op_dcl
     : op_attribute op_type_spec T_IDENTIFIER parameter_dcls
                                        raises_expr context_expr {
-        if (idl_Parser_parseMethod(idl_yparser(), $2, $3, $4)) {
+        if (Parser_parseMethod(idl_yparser(), $2, $3, $4)) {
             if (!corto_lasterr()) corto_seterr("unknown error at %s:%d", __FILE__, __LINE__);
             YYERROR;
         }

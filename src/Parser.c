@@ -1,17 +1,10 @@
-/* $CORTO_GENERATED
- *
- * Parser.c
- *
- * Only code written between the begin and end tags will be preserved
- * when the file is regenerated.
- */
+/* This is a managed file. Do not delete this comment. */
 
 #include <corto/ext/idl/idl.h>
 
-int16_t _idl_Parser_construct(
+int16_t idl_Parser_construct(
     idl_Parser this)
 {
-/* $begin(corto/ext/idl/Parser/construct) */
 
     if (!this->source) {
         if (this->filename) {
@@ -26,44 +19,38 @@ int16_t _idl_Parser_construct(
     return 0;
 error:
     return -1;
-/* $end */
 }
 
-corto_struct _idl_Parser_declareStruct(
+corto_struct idl_Parser_declareStruct(
     idl_Parser this,
     corto_string name)
 {
-/* $begin(corto/ext/idl/Parser/declareStruct) */
 
     corto_struct result = corto_structDeclareChild(this->scope, name);
     corto_ptr_setref(&this->scope, result);
     corto_struct(result)->baseAccess = CORTO_PRIVATE;
 
     return result;
-/* $end */
 }
 
-corto_union _idl_Parser_declareUnion(
+corto_union idl_Parser_declareUnion(
     idl_Parser this,
     corto_string name,
     corto_type discriminator)
 {
-/* $begin(corto/ext/idl/Parser/declareUnion) */
 
     corto_union result = corto_unionDeclareChild(this->scope, name);
     corto_ptr_setref(&this->scope, result);
     corto_ptr_setref(result->discriminator, discriminator);
 
     return result;
-/* $end */
 }
 
-corto_class _idl_Parser_declareValueType(
+corto_class idl_Parser_declareValueType(
     idl_Parser this,
     corto_string name,
     idl_InheritanceSpec *inherits)
 {
-/* $begin(corto/ext/idl/Parser/declareValueType) */
     corto_interfaceseq seq = {0, NULL};
 
     if (inherits->supports && corto_ll_size(inherits->supports)) {
@@ -85,14 +72,12 @@ corto_class _idl_Parser_declareValueType(
     corto_ptr_setref(&this->scope, result);
 
     return result;
-/* $end */
 }
 
-int16_t _idl_Parser_defineStruct(
+int16_t idl_Parser_defineStruct(
     idl_Parser this,
     corto_struct s)
 {
-/* $begin(corto/ext/idl/Parser/defineStruct) */
 
     corto_ptr_setref(&this->scope, corto_parentof(this->scope));
 
@@ -104,14 +89,12 @@ int16_t _idl_Parser_defineStruct(
     return 0;
 error:
     return -1;
-/* $end */
 }
 
-int16_t _idl_Parser_defineUnion(
+int16_t idl_Parser_defineUnion(
     idl_Parser this,
     corto_union u)
 {
-/* $begin(corto/ext/idl/Parser/defineUnion) */
     corto_ptr_setref(&this->scope, corto_parentof(this->scope));
 
     if (corto_define(u)) {
@@ -122,14 +105,12 @@ int16_t _idl_Parser_defineUnion(
     return 0;
 error:
     return -1;
-/* $end */
 }
 
-int16_t _idl_Parser_defineValueType(
+int16_t idl_Parser_defineValueType(
     idl_Parser this,
     corto_class v)
 {
-/* $begin(corto/ext/idl/Parser/defineValueType) */
 
     corto_ptr_setref(&this->scope, corto_parentof(this->scope));
 
@@ -141,29 +122,25 @@ int16_t _idl_Parser_defineValueType(
     return 0;
 error:
     return -1;
-/* $end */
 }
 
-int16_t _idl_Parser_parse(
+int16_t idl_Parser_parse(
     idl_Parser this)
 {
-/* $begin(corto/ext/idl/Parser/parse) */
 
     this->line = 1;
     corto_int16 idl_yparse(idl_Parser p);
     idl_yparse(this);
 
     return this->errors;
-/* $end */
 }
 
-int16_t _idl_Parser_parseCase(
+int16_t idl_Parser_parseCase(
     idl_Parser this,
     corto_type type,
     idl_DeclaratorList name,
     corto_int32List discriminator)
 {
-/* $begin(corto/ext/idl/Parser/parseCase) */
 
     corto_iter it = corto_ll_iter(name);
     while (corto_iter_hasNext(&it)) {
@@ -192,15 +169,13 @@ int16_t _idl_Parser_parseCase(
     return 0;
 error:
     return -1;
-/* $end */
 }
 
-corto_enum _idl_Parser_parseEnum(
+corto_enum idl_Parser_parseEnum(
     idl_Parser this,
     corto_string name,
     corto_stringList enumerators)
 {
-/* $begin(corto/ext/idl/Parser/parseEnum) */
 
     corto_enum result = corto_enumDeclareChild(this->scope, name);
 
@@ -223,16 +198,14 @@ corto_enum _idl_Parser_parseEnum(
     return result;
 error:
     return NULL;
-/* $end */
 }
 
-int16_t _idl_Parser_parseMember(
+int16_t idl_Parser_parseMember(
     idl_Parser this,
     corto_type type,
     idl_DeclaratorList name,
     bool readonly)
 {
-/* $begin(corto/ext/idl/Parser/parseMember) */
      corto_modifier modifiers = CORTO_GLOBAL;
 
      if (readonly) {
@@ -279,16 +252,14 @@ int16_t _idl_Parser_parseMember(
     return 0;
 error:
     return -1;
-/* $end */
 }
 
-int16_t _idl_Parser_parseMethod(
+int16_t idl_Parser_parseMethod(
     idl_Parser this,
     corto_type returnType,
     corto_string name,
     corto_parameterList parameters)
 {
-/* $begin(corto/ext/idl/Parser/parseMethod) */
     corto_id sig;
     corto_method m = NULL;
     corto_uint32 i = 0;
@@ -331,10 +302,9 @@ int16_t _idl_Parser_parseMethod(
     return 0;
 error:
     return -1;
-/* $end */
 }
 
-/* $header(corto/ext/idl/Parser/parsePragma) */
+
 corto_int16 idl_Parser_parseKeylist(
     idl_Parser this)
 {
@@ -399,12 +369,11 @@ corto_int16 idl_Parser_parseOptional(
 error:
     return -1;
 }
-/* $end */
-int16_t _idl_Parser_parsePragma(
+
+int16_t idl_Parser_parsePragma(
     idl_Parser this,
     corto_string args)
 {
-/* $begin(corto/ext/idl/Parser/parsePragma) */
     char *tok;
 
     tok = strtok(args, " \n\t");
@@ -428,15 +397,13 @@ int16_t _idl_Parser_parsePragma(
     return 0;
 error:
     return -1;
-/* $end */
 }
 
-corto_object _idl_Parser_parseTypedef(
+corto_object idl_Parser_parseTypedef(
     idl_Parser this,
     corto_type t,
     idl_DeclaratorList declarators)
 {
-/* $begin(corto/ext/idl/Parser/parseTypedef) */
     corto_object result = NULL;
 
     /* Only allow typedefs to primitives or non-scoped types */
@@ -448,7 +415,7 @@ corto_object _idl_Parser_parseTypedef(
         if (!declaratorType) {
             goto error;
         }
-        if ((declaratorType->kind == CORTO_PRIMITIVE) || !corto_checkAttr(declaratorType, CORTO_ATTR_SCOPED)) {
+        if ((declaratorType->kind == CORTO_PRIMITIVE) || !corto_checkAttr(declaratorType, CORTO_ATTR_NAMED)) {
             result = corto_declareChild(this->scope, d->identifier, corto_typeof(declaratorType));
             if (!result) {
                 goto error;
@@ -469,24 +436,20 @@ corto_object _idl_Parser_parseTypedef(
     return result;
 error:
     return NULL;
-/* $end */
 }
 
-void _idl_Parser_popModule(
+void idl_Parser_popModule(
     idl_Parser this)
 {
-/* $begin(corto/ext/idl/Parser/popModule) */
 
     corto_ptr_setref(&this->scope, corto_parentof(this->scope));
 
-/* $end */
 }
 
-corto_package _idl_Parser_pushModule(
+corto_package idl_Parser_pushModule(
     idl_Parser this,
     corto_string name)
 {
-/* $begin(corto/ext/idl/Parser/pushModule) */
 
     corto_package p = corto_packageDeclareChild(this->scope, name);
     if (!p) {
@@ -501,5 +464,5 @@ corto_package _idl_Parser_pushModule(
     return p;
 error:
     return NULL;
-/* $end */
 }
+
