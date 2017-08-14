@@ -10,7 +10,7 @@
 #include <corto/corto.h>
 #include <include/_project.h>
 #include <corto/test/test.h>
-#include <corto/ext/idl/idl.h>
+#include <driver/ext/idl/idl.h>
 #include <corto/c/c.h>
 
 /* $header() */

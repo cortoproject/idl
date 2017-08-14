@@ -1,4 +1,4 @@
-#package corto/ext/idl
+#package driver/ext/idl
 
 // Stub Typedefs
 class Typedef:/

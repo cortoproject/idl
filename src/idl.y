@@ -22,7 +22,7 @@
 
  %{
 
-#include "corto/ext/idl/idl.h"
+#include "driver/ext/idl/idl.h"
 
 /* Forward declarations of yacc functions */
 void yyerror(const char *str);

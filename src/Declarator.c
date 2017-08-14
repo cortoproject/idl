@@ -1,6 +1,6 @@
 /* This is a managed file. Do not delete this comment. */
 
-#include <corto/ext/idl/idl.h>
+#include <driver/ext/idl/idl.h>
 
 corto_type idl_Declarator_getType(
     idl_Declarator this,

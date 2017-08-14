@@ -1,2 +1,2 @@
-/corto/ext/idl
+/driver/ext/idl
 /corto/test

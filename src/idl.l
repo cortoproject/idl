@@ -23,7 +23,7 @@
 
 %{
 
-#include "corto/ext/idl/idl.h"
+#include "driver/ext/idl/idl.h"
 #include "y.tab.h"
 
 idl_Parser idl_yparser(void);

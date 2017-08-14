@@ -1,5 +1,5 @@
 
-PACKAGE = 'corto/ext/idl'
+PACKAGE = 'driver/ext/idl'
 
 YACC = "idl.y"
 LEX = "idl.l"
