@@ -150,7 +150,7 @@ int16_t idl_Parser_parseCase(
         corto_case m = corto_caseDeclareChild(this->scope, d->identifier);
 
         corto_ptr_setref(&corto_member(m)->type, t);
-        corto_member(m)->state = CORTO_DEFINED | CORTO_DECLARED;
+        corto_member(m)->state = CORTO_VALID | CORTO_DECLARED;
         corto_member(m)->weak = FALSE;
 
         corto_iter dIt = corto_ll_iter(discriminator);
@@ -240,7 +240,7 @@ int16_t idl_Parser_parseMember(
 
         corto_ptr_setref(&corto_member(m)->type, memberType);
         corto_member(m)->modifiers |= modifiers;
-        corto_member(m)->state = CORTO_DEFINED | CORTO_DECLARED;
+        corto_member(m)->state = CORTO_VALID | CORTO_DECLARED;
         corto_member(m)->weak = FALSE;
 
         if (corto_define(m)) {

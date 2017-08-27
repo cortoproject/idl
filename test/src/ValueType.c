@@ -29,9 +29,8 @@ corto_void _test_ValueType_tc_attribute(
     corto_object foo = corto_resolve(NULL, "Foo");
     test_assert(foo != NULL);
     test_assert(corto_typeof(foo) == corto_type(corto_class_o));
-    test_assert(corto_checkState(foo, CORTO_VALID));
     test_assert(corto_checkState(foo, CORTO_DECLARED));
-    test_assert(corto_checkState(foo, CORTO_DEFINED));
+    test_assert(corto_checkState(foo, CORTO_VALID));
 
     corto_interface i = corto_interface(foo);
     test_assert(i->members.length == 6);
@@ -52,16 +51,14 @@ corto_void _test_ValueType_tc_attributeEnum(
     corto_object foo = corto_resolve(NULL, "Foo");
     test_assert(foo != NULL);
     test_assert(corto_typeof(foo) == corto_type(corto_class_o));
-    test_assert(corto_checkState(foo, CORTO_VALID));
     test_assert(corto_checkState(foo, CORTO_DECLARED));
-    test_assert(corto_checkState(foo, CORTO_DEFINED));
+    test_assert(corto_checkState(foo, CORTO_VALID));
 
     corto_object e = corto_resolve(NULL, "Foo::Color");
     test_assert(e != NULL);
     test_assert(corto_typeof(e) == corto_type(corto_enum_o));
-    test_assert(corto_checkState(e, CORTO_VALID));
     test_assert(corto_checkState(e, CORTO_DECLARED));
-    test_assert(corto_checkState(e, CORTO_DEFINED));    
+    test_assert(corto_checkState(e, CORTO_VALID));    
 
     corto_interface i = corto_interface(foo);
     test_assert(i->members.length == 6);
@@ -83,9 +80,8 @@ corto_void _test_ValueType_tc_attributeMulti(
     corto_object foo = corto_resolve(NULL, "Foo");
     test_assert(foo != NULL);
     test_assert(corto_typeof(foo) == corto_type(corto_class_o));
-    test_assert(corto_checkState(foo, CORTO_VALID));
     test_assert(corto_checkState(foo, CORTO_DECLARED));
-    test_assert(corto_checkState(foo, CORTO_DEFINED));
+    test_assert(corto_checkState(foo, CORTO_VALID));
 
     corto_interface i = corto_interface(foo);
     test_assert(i->members.length == 6);
@@ -109,9 +105,8 @@ corto_void _test_ValueType_tc_attributeReadonly(
     corto_object foo = corto_resolve(NULL, "Foo");
     test_assert(foo != NULL);
     test_assert(corto_typeof(foo) == corto_type(corto_class_o));
-    test_assert(corto_checkState(foo, CORTO_VALID));
     test_assert(corto_checkState(foo, CORTO_DECLARED));
-    test_assert(corto_checkState(foo, CORTO_DEFINED));
+    test_assert(corto_checkState(foo, CORTO_VALID));
 
     corto_interface i = corto_interface(foo);
     test_assert(i->members.length == 6);
@@ -133,16 +128,14 @@ corto_void _test_ValueType_tc_attributeStruct(
     corto_object foo = corto_resolve(NULL, "Foo");
     test_assert(foo != NULL);
     test_assert(corto_typeof(foo) == corto_type(corto_class_o));
-    test_assert(corto_checkState(foo, CORTO_VALID));
     test_assert(corto_checkState(foo, CORTO_DECLARED));
-    test_assert(corto_checkState(foo, CORTO_DEFINED));
+    test_assert(corto_checkState(foo, CORTO_VALID));
 
     corto_object s = corto_resolve(NULL, "Foo::Nested");
     test_assert(s != NULL);
     test_assert(corto_typeof(s) == corto_type(corto_struct_o));
-    test_assert(corto_checkState(s, CORTO_VALID));
     test_assert(corto_checkState(s, CORTO_DECLARED));
-    test_assert(corto_checkState(s, CORTO_DEFINED));    
+    test_assert(corto_checkState(s, CORTO_VALID));    
 
     corto_interface i = corto_interface(foo);
     test_assert(i->members.length == 6);
@@ -163,17 +156,15 @@ corto_void _test_ValueType_tc_methodInParam(
 
     corto_object foo = corto_resolve(NULL, "Foo");
     test_assert(foo != NULL);
-    test_assert(corto_typeof(foo) == corto_type(corto_class_o));
-    test_assert(corto_checkState(foo, CORTO_VALID));
+    test_assert(corto_checkState(foo, CORTO_OBJECT_IS_VALID));
     test_assert(corto_checkState(foo, CORTO_DECLARED));
-    test_assert(corto_checkState(foo, CORTO_DEFINED));
+    test_assert(corto_checkState(foo, CORTO_VALID));
 
     corto_object m = corto_resolve(NULL, "Foo::inparam");
     test_assert(m != NULL);
     test_assert(corto_typeof(m) == corto_type(corto_method_o));
-    test_assert(corto_checkState(m, CORTO_VALID));
     test_assert(corto_checkState(m, CORTO_DECLARED));
-    test_assert(!corto_checkState(m, CORTO_DEFINED));
+    test_assert(!corto_checkState(m, CORTO_VALID));
 
     corto_function f = corto_function(m);
     test_assert(f->parameters.length == 1);
@@ -196,16 +187,14 @@ corto_void _test_ValueType_tc_methodOutParam(
     corto_object foo = corto_resolve(NULL, "Foo");
     test_assert(foo != NULL);
     test_assert(corto_typeof(foo) == corto_type(corto_class_o));
-    test_assert(corto_checkState(foo, CORTO_VALID));
     test_assert(corto_checkState(foo, CORTO_DECLARED));
-    test_assert(corto_checkState(foo, CORTO_DEFINED));
+    test_assert(corto_checkState(foo, CORTO_VALID));
 
     corto_object m = corto_resolve(NULL, "Foo::outparam");
     test_assert(m != NULL);
     test_assert(corto_typeof(m) == corto_type(corto_method_o));
-    test_assert(corto_checkState(m, CORTO_VALID));
     test_assert(corto_checkState(m, CORTO_DECLARED));
-    test_assert(!corto_checkState(m, CORTO_DEFINED));
+    test_assert(!corto_checkState(m, CORTO_VALID));
 
     corto_function f = corto_function(m);
     test_assert(f->parameters.length == 1);
